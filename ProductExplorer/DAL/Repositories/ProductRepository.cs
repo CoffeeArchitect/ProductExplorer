@@ -127,6 +127,29 @@ namespace ProductExplorer.DAL.Repositories
             }
         }
         /// <summary>
+        /// Обновить товар в базе данных
+        /// </summary>
+        /// <param name="product"></param>
+        public void Update(Product product)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("usp_UpdateProduct", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    
+                    command.Parameters.AddWithValue("@Article", product.Article);
+                    command.Parameters.AddWithValue("@Name", product.Name);
+                    command.Parameters.AddWithValue("@Price", product.Price);
+                    command.Parameters.AddWithValue("@Quantity", product.Quantity);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        /// <summary>
         /// Сохранить изменения в базе данных
         /// </summary>
         /// <param name="product"></param>

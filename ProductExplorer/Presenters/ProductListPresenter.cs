@@ -1,5 +1,6 @@
 ﻿using ProductExplorer.DAL.Repositories;
 using ProductExplorer.Views;
+using System.Windows.Forms;
 
 namespace ProductExplorer.Presenters
 {

@@ -15,7 +15,7 @@ namespace ProductExplorer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ProductListForm());
+            Application.Run(new ProductListView());
         }
     }
 }

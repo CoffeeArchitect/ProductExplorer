@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ProductExplorer.DAL.Repositories
 {
@@ -10,7 +7,7 @@ namespace ProductExplorer.DAL.Repositories
         IEnumerable<T> GetAll();
         T GetById(int id);
         void Add(T entity);
-        void Delete(T entity);
-        void Save();
+        void Delete(int id);
+        void Save(T entity);
     }
 }

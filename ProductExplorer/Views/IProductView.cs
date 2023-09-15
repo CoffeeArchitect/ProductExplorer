@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
 namespace ProductExplorer.Views
 {
-    internal interface IProductView
+    public interface IProductView
     {
+        string ProductName { get; set; }
+        decimal ProductPrice { get; set; }
+        Image ProductImage { get; set; }
+
+        void ShowView();
+        void CloseView();
     }
 }

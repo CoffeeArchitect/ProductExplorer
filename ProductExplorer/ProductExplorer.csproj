@@ -59,21 +59,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\ProductForm.cs">
+    <Compile Include="DAL\Repositories\IProductRepository.cs" />
+    <Compile Include="DAL\Repositories\ProductRepository.cs" />
+    <Compile Include="Views\ProductView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProductForm.Designer.cs">
-      <DependentUpon>ProductForm.cs</DependentUpon>
+    <Compile Include="Views\ProductView.Designer.cs">
+      <DependentUpon>ProductView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProductListForm.cs">
+    <Compile Include="Views\ProductListView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProductListForm.Designer.cs">
-      <DependentUpon>ProductListForm.cs</DependentUpon>
+    <Compile Include="Views\ProductListView.Designer.cs">
+      <DependentUpon>ProductListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Presenters\ProductListPresenter.cs" />
+    <Compile Include="Presenters\ProductPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\IProductListView.cs" />
+    <Compile Include="Views\IProductView.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -83,6 +89,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\ProductListView.resx">
+      <DependentUpon>ProductListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ProductView.resx">
+      <DependentUpon>ProductView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,15 +105,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Presenters\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ProductDB.mdf">
+    <Content Include="DAL\ProductDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProductDB_log.ldf">
+    <Content Include="DAL\ProductDB_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>ProductDB.mdf</DependentUpon>
     </Content>

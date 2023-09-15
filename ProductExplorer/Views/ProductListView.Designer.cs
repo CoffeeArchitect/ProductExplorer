@@ -31,7 +31,7 @@
             this.productGridView = new System.Windows.Forms.DataGridView();
             this.btnImportExcel = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.exitBtn = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.productGridView)).BeginInit();
             this.SuspendLayout();
@@ -62,14 +62,14 @@
             this.btnEdit.Text = "Редактировать";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
-            // exitBtn
+            // btnExit
             // 
-            this.exitBtn.Location = new System.Drawing.Point(1014, 502);
-            this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(100, 23);
-            this.exitBtn.TabIndex = 1;
-            this.exitBtn.Text = "Выйти";
-            this.exitBtn.UseVisualStyleBackColor = true;
+            this.btnExit.Location = new System.Drawing.Point(1014, 502);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(100, 23);
+            this.btnExit.TabIndex = 1;
+            this.btnExit.Text = "Выйти";
+            this.btnExit.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
@@ -86,7 +86,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1126, 556);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.exitBtn);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnImportExcel);
             this.Controls.Add(this.productGridView);
@@ -102,7 +102,7 @@
         private System.Windows.Forms.DataGridView productGridView;
         private System.Windows.Forms.Button btnImportExcel;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnDelete;
     }
 }

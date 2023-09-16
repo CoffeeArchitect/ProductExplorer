@@ -10,9 +10,12 @@ namespace ProductExplorer.DAL.Repositories
     /// <summary>
     /// Репозиторий для работы с товарами в базе данных SQL Server
     /// </summary>
-    public class ProductRepository : IProductRepository<Product>
+    public class ProductRepository : BaseRepository, IProductRepository
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["СonnectToLocalDb"].ConnectionString;
+        public ProductRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         /// <summary>
         /// Получить все товары из базы данных
         /// </summary>
@@ -21,7 +24,7 @@ namespace ProductExplorer.DAL.Repositories
         {
             List<Product> products = new List<Product>();
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand("usp_GetAllProducts", connection))
@@ -58,7 +61,7 @@ namespace ProductExplorer.DAL.Repositories
         {
             Product product = null;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand("usp_GetProductById", connection))
@@ -92,7 +95,7 @@ namespace ProductExplorer.DAL.Repositories
         /// <param name="product"></param>
         public void Add(Product product)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlTransaction transaction = connection.BeginTransaction())
@@ -126,7 +129,7 @@ namespace ProductExplorer.DAL.Repositories
         /// <param name="productId"></param>
         public void Delete(int productId)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand("usp_DeleteProduct", connection))
@@ -145,7 +148,7 @@ namespace ProductExplorer.DAL.Repositories
         /// <param name="product"></param>
         public void Update(Product product)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand("usp_UpdateProduct", connection))
@@ -168,7 +171,7 @@ namespace ProductExplorer.DAL.Repositories
         /// <param name="product"></param>
         public void Save(Product product)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand("usp_SaveProduct", connection))

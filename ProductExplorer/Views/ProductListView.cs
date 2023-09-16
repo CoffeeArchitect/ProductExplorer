@@ -12,7 +12,7 @@ namespace ProductExplorer
         public ProductListView()
         {
             InitializeComponent();
-            presenter = new ProductListPresenter(this);
+       
         }
 
         public event EventHandler ImportExcelClicked
@@ -39,7 +39,12 @@ namespace ProductExplorer
             remove { btnExit.Click -= value; }
         }
 
-        public DataGridView DataGridView => productGridView;
+        //public DataGridView DataGridView => productGridView;
+
+        public void SetProductListBindingSource(BindingSource bindingSource)
+        {
+            productGridView.DataSource = bindingSource;
+        }
 
         public void ShowView()
         {

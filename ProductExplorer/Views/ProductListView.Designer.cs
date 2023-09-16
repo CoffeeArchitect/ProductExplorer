@@ -38,6 +38,7 @@
             // 
             // productGridView
             // 
+            this.productGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.productGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.productGridView.Location = new System.Drawing.Point(13, 13);
             this.productGridView.Name = "productGridView";

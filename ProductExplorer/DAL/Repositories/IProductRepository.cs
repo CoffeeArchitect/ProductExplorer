@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using ProductExplorer.Models;
+using System.Collections.Generic;
 
 namespace ProductExplorer.DAL.Repositories
 {
-    public interface IProductRepository<T> where T : class
+    public interface IProductRepository
     {
-        IEnumerable<T> GetAll();
-        T GetById(int id);
-        void Add(T entity);
+        IEnumerable<Product> GetAll();
+        Product GetById(int id);
+        void Add(Product product);
         void Delete(int id);
-        void Update(T entity);
-        void Save(T entity);
+        void Update(Product product);
+        void Save(Product product);
     }
 }

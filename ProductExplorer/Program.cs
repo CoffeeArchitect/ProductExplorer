@@ -1,5 +1,9 @@
-﻿using System;
+﻿using ProductExplorer.DAL.Repositories;
+using ProductExplorer.Presenters;
+using ProductExplorer.Views;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -15,7 +19,11 @@ namespace ProductExplorer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ProductListView());
+            string connectionString = ConfigurationManager.ConnectionStrings["СonnectToLocalDb"].ConnectionString;
+            IProductListView view = new ProductListView();
+            IProductRepository repository = new ProductRepository(connectionString);
+            ProductListPresenter presenter = new ProductListPresenter(view, repository);
+            Application.Run((Form)view);
         }
     }
 }

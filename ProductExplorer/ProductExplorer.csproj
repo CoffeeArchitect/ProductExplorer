@@ -80,6 +80,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\Repositories\BaseRepository.cs" />
     <Compile Include="DAL\Repositories\IProductRepository.cs" />
     <Compile Include="DAL\Repositories\ProductRepository.cs" />
     <Compile Include="Services\ExcelImporter.cs" />

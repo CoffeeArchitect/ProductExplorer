@@ -1,23 +1,27 @@
-﻿using ProductExplorer.Views;
+﻿using ProductExplorer.Models;
+using ProductExplorer.Views;
 using System.Drawing;
 
 namespace ProductExplorer.Presenters
 {
     public class ProductPresenter
     {
-        private readonly IProductView view;
+        private readonly IProductView _view;
+        private readonly Product _prodcut;
 
-        public ProductPresenter(IProductView view)
+        public ProductPresenter(IProductView view, Product product)
         {
-            this.view = view;
+            _view = view;
+            _prodcut = product;
+            ShowProductDetails(_prodcut.Name, _prodcut.Price);
         }
 
-        public void ShowProductDetails(string name, decimal price, Image image)
+        public void ShowProductDetails(string name, decimal price)
         {
-            view.ProductName = name;
-            view.ProductPrice = price;
-            view.ProductImage = image;
-            view.ShowView();
+            _view.ProductName = name;
+            _view.ProductPrice = price;
+            
+            _view.ShowView();
         }
     }
 }

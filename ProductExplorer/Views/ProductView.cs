@@ -13,12 +13,12 @@ namespace ProductExplorer.Forms
 {
     public partial class ProductView : Form, IProductView
     {
-        private readonly ProductPresenter presenter;
+        
 
         public ProductView()
         {
             InitializeComponent();
-            presenter = new ProductPresenter(this);
+            
         }
         public string ProductArticle
         {

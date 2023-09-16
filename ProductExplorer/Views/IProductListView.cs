@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ProductExplorer.Views
@@ -13,7 +10,10 @@ namespace ProductExplorer.Views
         event EventHandler DeleteProductClicked;
         event EventHandler ExitClicked;
 
-        DataGridView DataGridView { get; }
+        //DataGridView DataGridView { get; }
+
+
+        void SetProductListBindingSource(BindingSource bindingSource);
 
         void ShowView();
         void CloseView();

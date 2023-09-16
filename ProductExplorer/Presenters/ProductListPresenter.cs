@@ -1,5 +1,6 @@
 ﻿using NPOI.SS.Formula.Functions;
 using ProductExplorer.DAL.Repositories;
+using ProductExplorer.Forms;
 using ProductExplorer.Models;
 using ProductExplorer.Services;
 using ProductExplorer.Views;
@@ -11,29 +12,35 @@ namespace ProductExplorer.Presenters
 {
     public class ProductListPresenter
     {
-        private readonly IProductListView view;
-        private readonly ProductRepository productRepository;
+        private readonly IProductListView _view;
+        private BindingSource _bindingSource;
+        private IProductRepository _repository;
+        private IEnumerable<Product> products;
+        public Product Product { get; set; }
 
-        public ProductListPresenter(IProductListView view)
+        public ProductListPresenter(IProductListView view, IProductRepository repository)
         {
-            this.view = view;
-            productRepository = new ProductRepository();
+            _bindingSource = new BindingSource();
+            _view = view;
+            _repository = repository;
             WireUpEvents();
+            _view.SetProductListBindingSource(_bindingSource);
             LoadProducts();
+            _view.ShowView();
         }
 
         private void WireUpEvents()
         {
-            view.ImportExcelClicked += (sender, args) => ImportExcel();
-            view.EditProductClicked += (sender, args) => EditProduct();
-            view.DeleteProductClicked += (sender, args) => DeleteProduct();
-            view.ExitClicked += (sender, args) => view.CloseView();
+            _view.ImportExcelClicked += (sender, args) => ImportExcel();
+            _view.EditProductClicked += (sender, args) => EditProduct();
+            _view.DeleteProductClicked += (sender, args) => DeleteProduct();
+            _view.ExitClicked += (sender, args) => _view.CloseView();
         }
 
         private void LoadProducts()
         {
-            var products = productRepository.GetAll();
-            view.DataGridView.DataSource = products;
+            var products = _repository.GetAll();
+            _bindingSource.DataSource = products;
         }
 
         private void ImportExcel()
@@ -49,7 +56,7 @@ namespace ProductExplorer.Presenters
                 List<Product> importedProducts = excelImporter.ImportFromExcel(filePath);
                 foreach (var product in importedProducts)
                 {
-                    productRepository.Add(product);
+                    _repository.Add(product);
                 }
                 LoadProducts();
             }
@@ -57,27 +64,32 @@ namespace ProductExplorer.Presenters
 
         private void EditProduct()
         {
-            Product product = productRepository.GetById(productId); // Получение данных о продукте по идентификатору
-            view.ShowView(productView(product);
+            Product = (Product)_bindingSource.Current;
+            if (Product != null)
+            {
+                ProductView productEditView = new ProductView();
+                ProductPresenter productPresenter = new ProductPresenter(productEditView, Product);
+                
+            }
         }
         /// <summary>
         /// Удалить выбранный товар из базы данных
         /// </summary>
         private void DeleteProduct()
         {
-            if (view.DataGridView.SelectedRows.Count > 0)
-            {
-                int selectedRowIndex = view.DataGridView.SelectedRows[0].Index;
-                int selectedProductId = (int)view.DataGridView.Rows[selectedRowIndex].Cells[0].Value;
+            //if (_view.DataGridView.SelectedRows.Count > 0)
+            //{
+            //    int selectedRowIndex = _view.DataGridView.SelectedRows[0].Index;
+            //    int selectedProductId = (int)_view.DataGridView.Rows[selectedRowIndex].Cells[0].Value;
 
-                using (var scope = new TransactionScope())
-                {
-                    productRepository.Delete(selectedProductId);
-                    LoadProducts();
+            //    using (var scope = new TransactionScope())
+            //    {
+            //        _repository.Delete(selectedProductId);
+            //        LoadProducts();
 
-                    scope.Complete();
-                }
-            }
+            //        scope.Complete();
+            //    }
+            //}
         }
     }
 }

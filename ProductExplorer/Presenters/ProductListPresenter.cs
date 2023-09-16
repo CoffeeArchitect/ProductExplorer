@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace ProductExplorer.Presenters
 {
+    /// <summary>
+    /// Класс-презентер для формы ProductListView
+    /// </summary>
     public class ProductListPresenter
     {
         private readonly IProductListView _view;
@@ -28,7 +31,9 @@ namespace ProductExplorer.Presenters
             LoadProducts();
             _view.ShowView();
         }
-
+        /// <summary>
+        /// Регистрация событий формы ProductListView
+        /// </summary>
         private void WireUpEvents()
         {
             _view.ImportExcelClicked += (sender, args) => ImportExcel();
@@ -42,7 +47,9 @@ namespace ProductExplorer.Presenters
             var products = _repository.GetAll();
             _bindingSource.DataSource = products;
         }
-
+        /// <summary>
+        /// Импортировать товары из файла Excel
+        /// </summary>
         private void ImportExcel()
         {
             ExcelImporter excelImporter = new ExcelImporter();
@@ -61,15 +68,17 @@ namespace ProductExplorer.Presenters
                 LoadProducts();
             }
         }
-
+        /// <summary>
+        /// Показать форму редактирования товара
+        /// </summary>
         private void EditProduct()
         {
-            Product = (Product)_bindingSource.Current;
+            Product = _bindingSource.Current as Product;
+            
             if (Product != null)
             {
                 ProductView productEditView = new ProductView();
                 ProductPresenter productPresenter = new ProductPresenter(productEditView, Product);
-                
             }
         }
         /// <summary>

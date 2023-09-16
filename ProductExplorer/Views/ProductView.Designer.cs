@@ -44,9 +44,11 @@
             // 
             // pbProductImage
             // 
+            this.pbProductImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pbProductImage.Location = new System.Drawing.Point(13, 13);
             this.pbProductImage.Name = "pbProductImage";
             this.pbProductImage.Size = new System.Drawing.Size(187, 166);
+            this.pbProductImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbProductImage.TabIndex = 0;
             this.pbProductImage.TabStop = false;
             // 

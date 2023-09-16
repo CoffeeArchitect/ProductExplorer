@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using System;
 
 namespace ProductExplorer.DAL.Repositories
 {
@@ -94,16 +95,28 @@ namespace ProductExplorer.DAL.Repositories
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand("usp_AddProduct", connection))
+                using (SqlTransaction transaction = connection.BeginTransaction())
                 {
-                    command.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+                        using (SqlCommand command = new SqlCommand("usp_AddProduct", connection, transaction))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@Article", product.Article);
-                    command.Parameters.AddWithValue("@Name", product.Name);
-                    command.Parameters.AddWithValue("@Price", product.Price);
-                    command.Parameters.AddWithValue("@Quantity", product.Quantity);
+                            command.Parameters.AddWithValue("@Article", product.Article);
+                            command.Parameters.AddWithValue("@Name", product.Name);
+                            command.Parameters.AddWithValue("@Price", product.Price);
+                            command.Parameters.AddWithValue("@Quantity", product.Quantity);
 
-                    command.ExecuteNonQuery();
+                            command.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine("Ошибка добавления товара: " + ex.Message);
+                    }
                 }
             }
         }

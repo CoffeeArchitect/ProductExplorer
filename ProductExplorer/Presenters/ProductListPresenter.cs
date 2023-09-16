@@ -5,7 +5,6 @@ using ProductExplorer.Models;
 using ProductExplorer.Services;
 using ProductExplorer.Views;
 using System.Collections.Generic;
-using System.Transactions;
 using System.Windows.Forms;
 
 namespace ProductExplorer.Presenters
@@ -86,19 +85,12 @@ namespace ProductExplorer.Presenters
         /// </summary>
         private void DeleteProduct()
         {
-            //if (_view.DataGridView.SelectedRows.Count > 0)
-            //{
-            //    int selectedRowIndex = _view.DataGridView.SelectedRows[0].Index;
-            //    int selectedProductId = (int)_view.DataGridView.Rows[selectedRowIndex].Cells[0].Value;
-
-            //    using (var scope = new TransactionScope())
-            //    {
-            //        _repository.Delete(selectedProductId);
-            //        LoadProducts();
-
-            //        scope.Complete();
-            //    }
-            //}
+            Product = _bindingSource.Current as Product;
+            if (Product != null)
+            {
+                _repository.Delete(Product.Id);
+                LoadProducts();
+            }
         }
     }
 }

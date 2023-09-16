@@ -1,6 +1,5 @@
-﻿using NPOI.SS.Formula.Functions;
+﻿using ProductExplorer.DAL.Repositories;
 using ProductExplorer.Models;
-using ProductExplorer.Properties;
 using ProductExplorer.Views;
 using System;
 using System.Drawing;
@@ -9,6 +8,9 @@ using System.Windows;
 
 namespace ProductExplorer.Presenters
 {
+    /// <summary>
+    /// Класс-презентер для формы ProductView
+    /// </summary>
     public class ProductPresenter
     {
         private readonly IProductView _view;
@@ -20,7 +22,13 @@ namespace ProductExplorer.Presenters
             _prodcut = product;
             ShowProductDetails(_prodcut.Article, _prodcut.Name, _prodcut.Price, _prodcut.Quantity);
         }
-
+        /// <summary>
+        /// Метод для отображения детальной информации о товаре в форме ProductView
+        /// </summary>
+        /// <param name="article">Артикул</param>
+        /// <param name="name">Наименование</param>
+        /// <param name="price">Цена</param>
+        /// <param name="qty">Кол-во</param>
         public void ShowProductDetails(string article, string name, decimal price, int qty)
         {
             try
@@ -31,7 +39,6 @@ namespace ProductExplorer.Presenters
                 _view.ProductPrice = price;
                 _view.ProductQuantity = qty;
 
-                //_view.ProductImage = Image.FromFile(@"C:\Users\sergey.korolev.MICROS.000\source\repos\ProductExplorer\ProductExplorer\Resources\3A2915-R0M.jpg");
                 _view.ProductImage = Image.FromFile(path);
 
 
@@ -46,5 +53,10 @@ namespace ProductExplorer.Presenters
             }
             
         }
+
+
+        // TODO: Добавить метод для сохранения изменений в базе данных
+        
+
     }
 }

@@ -9,8 +9,16 @@ using System.IO;
 
 namespace ProductExplorer.Services
 {
+    /// <summary>
+    /// Класс хелпер для импорта данных из Excel
+    /// </summary>
     public class ExcelImporter
     {
+        /// <summary>
+        /// Импортировать данные из Excel
+        /// </summary>
+        /// <param name="filePath">Путь до файла</param>
+        /// <returns></returns>
         public List<Product> ImportFromExcel(string filePath)
         {
             List<Product> products = new List<Product>();

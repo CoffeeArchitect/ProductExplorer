@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="DAL\ProductDB.sql" />
     <Content Include="ProductDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,0 +1,11 @@
+﻿IF OBJECT_ID('Products', 'U') IS NOT NULL
+    DROP TABLE Products;
+
+
+CREATE TABLE Products (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Article VARCHAR(50) NOT NULL,
+    Name VARCHAR(250) NOT NULL,
+    Price NUMERIC(15, 2) NOT NULL DEFAULT 0,
+    Quantity INT NOT NULL DEFAULT 0
+);
